@@ -16,5 +16,18 @@ public class HotelBookingController {
 		return "hotels_homepage";
 	}
 	
-
+	@PostMapping("/hotels/results")
+	public String getHotelSearchResults(Model model,
+			@RequestParam("city") String city,
+			@RequestParam("checkInDate") String checkInDate,
+			@RequestParam("checkOutDate") String checkOutDate,
+			@RequestParam("rooms") String rooms
+			) {
+		
+		model.addAttribute("city", city);
+		model.addAttribute("checkInDate", checkInDate);
+		model.addAttribute("checkOutDate", checkOutDate);
+		
+		return "hotel_results_page";
+	}
 }
