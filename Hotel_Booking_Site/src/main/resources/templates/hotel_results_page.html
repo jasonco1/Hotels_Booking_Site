@@ -29,10 +29,28 @@ References: https://www.thymeleaf.org/doc/articles/layouts.html
 <body>
 
    <div class="container">
-    <h2> Available hotels in [[${city}]] from on [[${checkInDate}]] to [[${checkOutDate}]] </h1>
+    <h2 th:inline="text"> Available hotels in [[${city}]] from on [[${checkInDate}]] to [[${checkOutDate}]] </h2>
     <hr /> 
-    
-   </div>
    
+   <table>
+      <tr>
+         <th> Room ID   </th>
+         <th> Price  </th>
+         <th> Max Occupants   </th>
+         <th> Bed Type  </th>
+         <th> Number of Beds  </th>
+       </tr>
+       
+   <tr th:each="room : ${rooms_list}">
+      <td th:text="${room.room_id}"></td>
+      <td th:text="${room.price_per_night}"></td>
+      <td th:text="${room.max_occupants}"></td>
+      <td th:text="${room.bed_type}"></td>
+      <td th:text="${room.number_of_beds}"></td>
+   </tr>
+   
+   </table>   
+   </div>
+    
 </body>
 </html>
