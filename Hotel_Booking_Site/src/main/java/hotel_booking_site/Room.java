@@ -4,11 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
 @Table(name="rooms")
+//custom queries: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference
+@NamedQuery(name = "Room.findById",
+	query = "SELECT r FROM Room r WHERE room_id = ?1"
+)
 public class Room {
 	
 	@Id

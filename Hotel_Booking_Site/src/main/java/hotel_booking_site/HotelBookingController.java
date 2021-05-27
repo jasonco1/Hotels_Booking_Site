@@ -31,7 +31,7 @@ public class HotelBookingController {
 		model.addAttribute(checkOutDate);
 		
 		//Query database to find available rooms
-		Iterable<Room> rooms_list = hotelsRepository.findAllRoomsMatchingSearchCriteria();
+		Iterable<Room> rooms_list = hotelsRepository.findById(2);
 		model.addAttribute("rooms_list", rooms_list);
 		
 		return "hotel_results_page";
