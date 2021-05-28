@@ -36,4 +36,30 @@ public class HotelBookingController {
 		
 		return "hotel_results_page";
 	}
+	
+	@GetMapping("/hotels/login")
+	public String getHotelsLoginPage(Model model) {
+		return "hotels_login_page";
+	}
+	
+	@GetMapping("/hotels/signup")
+	public String getHotelsSignUpPage(Model model) {
+		return "hotels_signup_page";
+	}
+	
+	@GetMapping("/airline")
+	public String getAirlineHomepage(Model model) {
+		return "airline";
+	}
+	
+	@GetMapping("/carrentals")
+	public String getCarRentalsHomepage(Model model) {
+		return "car_rentals";
+	}
+	
+	@GetMapping("/deals")
+	public String getDealseHomepage(Model model) {
+		return "deals";
+	}
+		
 }

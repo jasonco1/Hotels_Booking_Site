@@ -1,31 +1,11 @@
 <!DOCTYPE html>
-<!--  
-References: https://www.thymeleaf.org/doc/articles/layouts.html
 
- -->
 <html xmlns:th="www.thymeleaf.org">
-<link rel="stylesheet" type="text/css" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css}" />
-<head>
-<meta charset="ISO-8859-1">
+<head th:replace="fragments :: html_head">
 <title>Hotels Home</title>
 </head>
 
-<header>
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-         <a class="navbar-brand" href="#">Hotels Finder</a>
-      </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li class="active"><a href="#">Login</a></li>
-    </ul>
-      </div>
-   </div>
- </div>
- <br /> <br /> <br />  
-</header>
+<header th:replace="fragments :: nav_bar"> </header>
 
 <body>
 
@@ -59,6 +39,8 @@ References: https://www.thymeleaf.org/doc/articles/layouts.html
       </form>
       
    </div>
+   
+   <div th:replace="fragments :: footer" class="text-center"></div>
    
 </body>
 </html>
