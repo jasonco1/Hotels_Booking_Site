@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-public interface HotelsRepository extends JpaRepository<Hotel, Long> {
+public interface RoomsRepository extends JpaRepository<Room, String> {
 	
-	Hotel findById(int id); 
+	List<Room> findByCityName(String cityName); 
+	
 }

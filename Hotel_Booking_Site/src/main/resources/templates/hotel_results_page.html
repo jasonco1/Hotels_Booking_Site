@@ -15,24 +15,33 @@
    
    <table>
       <tr>
-         <th> Room ID   </th>
-         <th> Price  </th>
+         <th> Hotel Name   </th>
+         <th> Price Per Night </th>
          <th> Max Occupants   </th>
          <th> Bed Type  </th>
          <th> Number of Beds  </th>
+         <th> City </th>
+         <th> Phone </th>
        </tr>
-       
-   <tr th:each="room : ${rooms_list}">
-      <td th:text="${room.room_id}"></td>
-      <td th:text="${room.price_per_night}"></td>
-      <td th:text="${room.max_occupants}"></td>
-      <td th:text="${room.bed_type}"></td>
-      <td th:text="${room.number_of_beds}"></td>
+   
+   <tr>
+      <td th:text="${roomInfo.hotel.getName()}"></td>
+      <td th:text="${roomInfo.room.price_per_night}"></td>
+      <td th:text="${roomInfo.room.max_occupants}"></td>
+      <td th:text="${roomInfo.room.bed_type}"></td>
+      <td th:text="${roomInfo.room.number_of_beds}"></td>
+      <td th:text="${roomInfo.hotel.getCity()}"></td>
+      <td th:text="${roomInfo.hotel.getPhone()}"></td>
    </tr>
+   
+   <!--     
+   <tr th:each="room : ${rooms_list}">
+   -->
    
    </table>   
    </div>
    
+      
    <div th:replace="fragments :: footer" class="text-center"></div>
 </body>
 </html>

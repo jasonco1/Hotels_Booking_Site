@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class HotelBookingController {
 	
 	@Autowired 
-	HotelsRepository hotelsRepository;
+	AvailableRoomsService availableRoomsService;
 	
 	@GetMapping("/hotels/home")
 	public String getHotelsHomepage(Model model) {
@@ -31,12 +31,27 @@ public class HotelBookingController {
 		model.addAttribute(checkOutDate);
 		
 		//Query database to find available rooms
-		Iterable<Room> rooms_list = hotelsRepository.findById(2);
-		model.addAttribute("rooms_list", rooms_list);
+		RoomInfo roomInfo = availableRoomsService.getRoomInfo(city);
 		
+		if (roomInfo == null) {
+			String no_rooms_found = "Sorry, no available rooms where found. Please try "
+					+ "a different date or city.";
+			model.addAttribute("no_rooms_found", no_rooms_found);
+			
+			return "no_results_page";
+			
+		}
+		
+		else {
+		model.addAttribute(roomInfo);
 		return "hotel_results_page";
+		
+		}
 	}
 	
+	
+	
+	//Navigation Bar Routes
 	@GetMapping("/hotels/login")
 	public String getHotelsLoginPage(Model model) {
 		return "hotels_login_page";

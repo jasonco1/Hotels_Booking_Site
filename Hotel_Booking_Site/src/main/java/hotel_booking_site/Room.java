@@ -4,57 +4,58 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name="rooms")
 //custom queries: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference
-@NamedQuery(name = "Room.findById",
-	query = "SELECT r FROM Room r WHERE room_id = ?1"
-)
+//https://www.javaguides.net/2018/11/spring-data-jpa-namednativequery-namednativequeries-example.html
+@NamedNativeQuery(name = "Room.findByCityName",
+	query = "SELECT r.id, r.hotel_id, r.price_per_night, r.max_occupants, r.bed_type, r.number_of_beds FROM rooms r JOIN hotels_table h ON r.hotel_id = h.id WHERE h.city = ?1",
+			resultClass = Room.class)
+			
 public class Room {
 	
 	@Id
-	private int room_id;
+	private int id;
+	private int hotel_id;
 	private double price_per_night;
 	private int max_occupants;
 	private String bed_type;
 	private int number_of_beds;
 	
-	//These values come from the hotels_table and refer to the hotel associated
-	//with the room
-	/*
-	private String name;
-	private String street_address;
-	private String city;
-	private String state;
-	private String country;
-	private String zip_code;
-	private String phone;
-	*/
-	
 	public Room () { }
 
-	public Room(int room_id, double price_per_night, int max_occupants, String bed_type, int number_of_beds)
+	public Room(int id, int hotel_id, double price_per_night, int max_occupants, String bed_type, int number_of_beds)
 	{
 		super();
-		this.room_id = room_id;
+		this.id = id;
+		this.hotel_id = hotel_id;
 		this.price_per_night = price_per_night;
 		this.max_occupants = max_occupants;
 		this.bed_type = bed_type;
 		this.number_of_beds = number_of_beds;
 	}
 
-	public int getRoom_id()
+	public int getId()
 	{
-		return room_id;
+		return id;
 	}
 
-	public void setRoom_id(int room_id)
+	public void setId(int id)
 	{
-		this.room_id = room_id;
+		this.id = id;
+	}
+
+	public int getHotel_id()
+	{
+		return hotel_id;
+	}
+
+	public void setHotel_id(int hotel_id)
+	{
+		this.hotel_id = hotel_id;
 	}
 
 	public double getPrice_per_night()
@@ -95,5 +96,6 @@ public class Room {
 	public void setNumber_of_beds(int number_of_beds)
 	{
 		this.number_of_beds = number_of_beds;
-	};
+	}
+
 }
