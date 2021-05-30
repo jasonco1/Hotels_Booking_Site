@@ -23,7 +23,8 @@
          <th> City </th>
          <th> Phone </th>
        </tr>
-   
+
+   <!-- <tr th:each="room : ${rooms_list}"> -->
    <tr>
       <td th:text="${roomInfo.hotel.getName()}"></td>
       <td th:text="${roomInfo.room.price_per_night}"></td>
@@ -33,13 +34,11 @@
       <td th:text="${roomInfo.hotel.getCity()}"></td>
       <td th:text="${roomInfo.hotel.getPhone()}"></td>
    </tr>
-   
-   <!--     
-   <tr th:each="room : ${rooms_list}">
-   -->
-   
+
    </table>   
+   <a th:href="@{/hotels/checkout}"> Book Now </a>
    </div>
+   
    
       
    <div th:replace="fragments :: footer" class="text-center"></div>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+
+<head th:replace="fragments :: html_head">
+<title>Hotel Results</title>
+</head>
+
+<header th:replace="fragments :: nav_bar"></header>
+
+<body>
+
+   <div class="container">
+    <h2 th:inline="text"> Your Booking Details </h2>
+    <hr /> 
+   </div>
+   
+   <div class="container">
+   <span th:text=${checkInDate}></span>
+   <span th:text=${checkOutDate}></span>
+   <span th:text=${totalPrice}></span>
+   </div>
+
+   <div th:replace="fragments :: footer" class="text-center"></div>
+</body>
+</html>

@@ -10,9 +10,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HotelBookingController {
 	
+	String persistedCity;
+	String persistedCheckInDate;
+	String persistedCheckOutDate;
+	String persistedRoomId;
+	
 	@Autowired 
 	AvailableRoomsService availableRoomsService;
 	
+	@Autowired
+	NewBookingService newBookingService;
+	
+	
+	//HTTP Routes
 	@GetMapping("/hotels/home")
 	public String getHotelsHomepage(Model model) {
 		return "hotels_homepage";
@@ -25,6 +35,11 @@ public class HotelBookingController {
 			@RequestParam("checkOutDate") String checkOutDate,
 			@RequestParam("rooms") String rooms
 			) {
+		
+		//persist city and checkIn/Out dates
+		persistedCity = city;
+		persistedCheckInDate = checkInDate;
+		persistedCheckOutDate = checkOutDate;
 		
 		model.addAttribute(city);
 		model.addAttribute(checkInDate);
@@ -49,6 +64,44 @@ public class HotelBookingController {
 		}
 	}
 	
+	@GetMapping("/hotels/checkout")
+	public String getCheckoutDetails(Model model) {
+		
+		model.addAttribute("city", persistedCity);
+		model.addAttribute("checkInDate", persistedCheckInDate);
+		model.addAttribute("checkOutDate", persistedCheckOutDate);
+		
+		return "new_customer_checkout_page";
+	}
+	
+	@PostMapping("/hotels/submitNewCustomerBooking")
+	public String persistBookingAndCustomerToDatabase(Model model,
+			//new booking parameters
+			@RequestParam("roomId") int roomId,
+			@RequestParam("numberOccupants") int numberOccupants,
+			
+			//new customer parameters
+			@RequestParam("firstName") String first_name,
+			@RequestParam("lastName") String last_name,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password
+			) {
+		
+		model.addAttribute("checkInDate", persistedCheckInDate);
+		model.addAttribute("checkOutDate", persistedCheckOutDate);
+		model.addAttribute("totalPrice", 199.00);
+		
+		Booking booking = new Booking();
+		booking.setRoom_id(1);
+		booking.setCheck_in_date(persistedCheckInDate);
+		booking.setCheck_out_date(persistedCheckOutDate);
+		booking.setTotal_price(199.00);
+		booking.setNumber_occupants(1);	
+		
+		newBookingService.persistNewBooking(booking);
+		
+		return "booking_confirmation_page";
+	}
 	
 	
 	//Navigation Bar Routes
