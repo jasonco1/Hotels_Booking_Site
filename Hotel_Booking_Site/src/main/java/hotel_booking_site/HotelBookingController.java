@@ -21,6 +21,9 @@ public class HotelBookingController {
 	@Autowired
 	NewBookingService newBookingService;
 	
+	@Autowired
+	CustomerDataService customerDataService;
+	
 	
 	//HTTP Routes
 	@GetMapping("/hotels/home")
@@ -91,6 +94,7 @@ public class HotelBookingController {
 		model.addAttribute("checkOutDate", persistedCheckOutDate);
 		model.addAttribute("totalPrice", 199.00);
 		
+		//persist new booking to database
 		Booking booking = new Booking();
 		booking.setRoom_id(1);
 		booking.setCheck_in_date(persistedCheckInDate);
@@ -99,6 +103,15 @@ public class HotelBookingController {
 		booking.setNumber_occupants(1);	
 		
 		newBookingService.persistNewBooking(booking);
+		
+		//persist new customer to database
+		Customer customer = new Customer();
+		customer.setFirst_name(first_name);
+		customer.setLast_name(last_name);
+		customer.setEmail(email);
+		customer.setCurrent_balance(10);
+		
+		customerDataService.persistNewCustomer(customer);
 		
 		return "booking_confirmation_page";
 	}
