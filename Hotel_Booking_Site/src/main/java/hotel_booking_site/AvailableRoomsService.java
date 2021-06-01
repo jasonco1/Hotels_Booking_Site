@@ -17,8 +17,7 @@ public class AvailableRoomsService {
 	private HotelsRepository hotelsRepository;
 	
 	//retrieve a list of RoomInfo objects with room and hotel information
-	//that represent the available rooms according to the user's search parameters
-	
+	//representing the available rooms according to the user's search parameters
 	public List<RoomInfo> getRoomInfo(String cityName) {
 		
 		List<RoomInfo> roomInfoList = new ArrayList<>();
