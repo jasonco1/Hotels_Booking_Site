@@ -1,5 +1,8 @@
 package hotel_booking_site;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,9 +52,9 @@ public class HotelBookingController {
 		model.addAttribute(checkOutDate);
 		
 		//Query database to find available rooms
-		RoomInfo roomInfo = availableRoomsService.getRoomInfo(city);
+		List<RoomInfo> roomInfoList = availableRoomsService.getRoomInfo(city);
 		
-		if (roomInfo == null) {
+		if (roomInfoList == null) {
 			String no_rooms_found = "Sorry, no available rooms where found. Please try "
 					+ "a different date or city.";
 			model.addAttribute("no_rooms_found", no_rooms_found);
@@ -61,7 +64,7 @@ public class HotelBookingController {
 		}
 		
 		else {
-		model.addAttribute(roomInfo);
+		model.addAttribute(roomInfoList);
 		return "hotel_results_page";
 		
 		}

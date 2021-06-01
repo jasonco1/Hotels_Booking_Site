@@ -12,16 +12,16 @@
    <div class="container">
     <h2 th:inline="text"> Finalize Reservation </h2>
      Staying in <span th:text=${city}> </span> 
-    <span th:text=${checkInDate}> </span>
+     from <span th:text=${checkInDate}> </span>
      to <span th:text=${checkOutDate}> </span>
     </div>
-    <hr /> 
+    <hr />
    
    <body>
    <div class="container" style=text-align:center>
-    <h3> Create a New Account </h3> 
+    <h3> Create a New Account to Complete Checkout </h3> 
+    
       <form action="/hotels/submitNewCustomerBooking" method="POST">
-      
       <input type="hidden" name="roomId" value=1>
       <input type="hidden" name="numberOccupants" value=4>
       
@@ -35,11 +35,10 @@
          <input type="text" id="lastName" name="lastName" placeholder="Smith"><br> <br>     
          <input type="submit" value="Book Stay">
       </form>
-      <br>
+      <br /> <br />
       <p>Already have an account.<a href="/hotels/login"> Login</a></p>
-      <br><br>
+      <br />
     </div>
-      
       
    <div th:replace="fragments :: footer" class="text-center"></div>
 </body>

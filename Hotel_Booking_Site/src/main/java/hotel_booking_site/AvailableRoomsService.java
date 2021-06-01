@@ -2,6 +2,7 @@ package hotel_booking_site;
 
 
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,24 +19,27 @@ public class AvailableRoomsService {
 	//retrieve a list of RoomInfo objects with room and hotel information
 	//that represent the available rooms according to the user's search parameters
 	
-	public RoomInfo getRoomInfo(String cityName) {
+	public List<RoomInfo> getRoomInfo(String cityName) {
 		
+		List<RoomInfo> roomInfoList = new ArrayList<>();
 		List<Room> rooms = roomsRepository.findByCityName(cityName);
+		
 		if (rooms.size() < 1) {
 			return null;
 		}
 		
 		else {
-		Room room = rooms.get(0);
-		
-		Hotel hotel = hotelsRepository.findById(room.getHotel_id());
-		
-		//build RoomInfo object
-		RoomInfo roomInfo = new RoomInfo(room, hotel);
-		
-		return roomInfo;
+			for (Room room : rooms) {
+				
+				//build RoomInfo object
+				Hotel hotel = hotelsRepository.findById(room.getHotel_id());
+				RoomInfo roomInfo = new RoomInfo(room, hotel);
+				roomInfoList.add(roomInfo);
+				
+				System.out.println(roomInfo.hotel.getName());
+				}
 		}
 		
+		return roomInfoList;
 	}
-	
 }

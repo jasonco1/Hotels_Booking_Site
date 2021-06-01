@@ -24,8 +24,7 @@
          <th> Phone </th>
        </tr>
 
-   <!-- <tr th:each="room : ${rooms_list}"> -->
-   <tr>
+   <tr th:each="roomInfo : ${roomInfoList}"> 
       <td th:text="${roomInfo.hotel.getName()}"></td>
       <td th:text="${roomInfo.room.price_per_night}"></td>
       <td th:text="${roomInfo.room.max_occupants}"></td>
