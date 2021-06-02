@@ -7,6 +7,11 @@ References: https://www.thymeleaf.org/doc/articles/layouts.html
 <head th:fragment="html_head">
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" type="text/css" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+
+<script type="text/javascript" th:src="@{https://code.jquery.com/jquery-1.11.3.min.js}"></script>
+<script type="text/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js}"></script>
+<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css}"/>
 </head>
 <header th:fragment="nav_bar">
   <div class="navbar navbar-inverse navbar-fixed-top">

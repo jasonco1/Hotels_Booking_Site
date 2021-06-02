@@ -18,14 +18,7 @@
          <label for="city"> City:  </label>
          <input type="text" id="city" name="city" placeholder="Monterey Bay"> 
          <br /> <br /> 
-         
-         <p> Datepicker Here. </p>
-         <label for="checkInDate"> Check-in:  </label>
-         <input type="text" id="checkInDate" name="checkInDate" placeholder="6/01/2021">
-         <label for="checkOutDate"> Check-out:  </label>
-         <input type="text" id="checkOutDate" name="checkOutDate" placeholder="6/07/2021"> 
-         <br /> <br />
-    
+            
           <label for ="rooms"> Rooms: </label>
           <select id="rooms" name="rooms"> 
             <option value=1> 1 </option>
@@ -35,7 +28,22 @@
           </select>
           <br /> <br />
           
-         <input type="submit" value="Submit">
+         <!-- Calender view was blocked by navbar, moved below rooms input for quick fix -->
+         <p> Datepicker Here. </p>
+         <div class="input-daterange input-group" id="datepicker">
+			<span class="input-group-addon">Check-in:</span>
+    		<input type="text" class="input-sm form-control" id="checkInDate" name="checkInDate" placeholder="6/01/2021" />
+    		<span class="input-group-addon">Check-out:</span>
+    		<input type="text" class="input-sm form-control" id="checkOutDate" name="checkOutDate" placeholder="6/07/2021" />
+		 </div> 
+         <br/> <br />
+                
+    <script type="text/javascript">
+    $('#datepicker').datepicker({
+    });
+    </script>
+          
+         <button class="button button1" type="submit">Search</button>
       </form>
       
    </div>

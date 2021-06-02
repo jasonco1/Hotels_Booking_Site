@@ -10,10 +10,12 @@
 <body>
 
    <div class="container">
-    <h2 th:inline="text"> Available hotels in [[${city}]] from on [[${checkInDate}]] to [[${checkOutDate}]] </h2>
-    <hr /> 
+      <h2 th:inline="text"> Available hotels in <span th:text=${city}></span> 
+      from <span th:text=${checkInDate}></span> to <span th:text=${checkOutDate}></span> 
+      </h2>
+   <hr /> 
    
-   <table>
+<!--    <table>
       <tr>
          <th> Hotel Name   </th>
          <th> Price Per Night </th>
@@ -22,9 +24,10 @@
          <th> Number of Beds  </th>
          <th> City </th>
          <th> Phone </th>
-       </tr>
+       </tr> -->
 
-   <tr th:each="roomInfo : ${roomInfoList}"> 
+<!--    <tr th:each="roomInfo : ${roomInfoList}"> 
+   <tr>
       <td th:text="${roomInfo.hotel.getName()}"></td>
       <td th:text="${roomInfo.room.price_per_night}"></td>
       <td th:text="${roomInfo.room.max_occupants}"></td>
@@ -36,8 +39,54 @@
 
    </table>   
    <a th:href="@{/hotels/checkout}"> Book Now </a>
-   </div>
+   </div> -->
    
+   
+
+  <div class="main">
+   <div class="listings" th:each="roomInfo : ${roomInfoList}"> 
+    <div class="listing_image"> 
+    <!-- Temp img import until blob image works -->
+    <img class="img_temp" src="/img/room_single_queen.jpg" alt="singleQ">
+    </div>
+    <div class="listing_content">
+        <h3 class="listing_title">
+   				<tr>
+   					<!-- Note: add room_desc or room_name -->
+   					<td>Single Suite,</td> 
+   					<td th:text="${roomInfo.room.number_of_beds}"></td>
+   					<td th:text="${roomInfo.room.bed_type}"></td><br>
+   				</tr>
+   				<div class="listing_text">
+   				Occupies up to <tr><td th:text="${roomInfo.room.max_occupants}"></td> people<tr><br>
+   					<tr>
+   					<td th:text="${roomInfo.room.number_of_beds}"></td>
+   					<td th:text="${roomInfo.room.bed_type}"></td>
+   					<br><br>
+   				</tr>
+   					Located at <tr><td th:text="${roomInfo.hotel.getName()}"></td><tr><br>
+   				<tr>
+   					<td th:text="${roomInfo.hotel.getStreet_address()}"></td>, 
+   					<td th:text="${roomInfo.hotel.getState()}"></td>,
+   					<td th:text="${roomInfo.hotel.getZip_code()}"></td>,
+   					<td th:text="${roomInfo.hotel.getCountry()}"></td>
+   				</tr>
+   				<br>
+   				Contact: <tr><td th:text="${roomInfo.hotel.getPhone()}"></td></tr>
+   				</div>
+   			</h3>
+   			<div class=listing_corner>
+   					$<tr><td th:text="${roomInfo.room.price_per_night}"></td> per night<tr><br>
+   					<form th:action="@{/hotels/checkout}" method="get">
+   					<!-- <input type="hidden" th:text="${roomInfo.room.id}" /> -->
+   					<button class="button button2" type="submit">Book Now</button>
+   					</form>
+   					<!-- <a th:href="@{/hotels/checkout}"> Book Now </a> -->
+   			</div>
+    </div>    
+
+</div>
+</div>
    
       
    <div th:replace="fragments :: footer" class="text-center"></div>

@@ -47,9 +47,9 @@ public class HotelBookingController {
 		persistedCheckInDate = checkInDate;
 		persistedCheckOutDate = checkOutDate;
 		
-		model.addAttribute(city);
-		model.addAttribute(checkInDate);
-		model.addAttribute(checkOutDate);
+		model.addAttribute("city", persistedCity);
+		model.addAttribute("checkInDate", persistedCheckInDate);
+		model.addAttribute("checkOutDate", persistedCheckOutDate);
 		
 		//Query database to find available rooms
 		List<RoomInfo> roomInfoList = availableRoomsService.getRoomInfo(city);
