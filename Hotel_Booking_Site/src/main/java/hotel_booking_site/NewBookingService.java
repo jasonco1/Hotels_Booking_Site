@@ -9,8 +9,9 @@ public class NewBookingService {
 	@Autowired
 	BookingsRepository bookingsRepository;
 	
-	public void persistNewBooking(Booking booking) {
+	public boolean persistNewBooking(Booking booking) {
 		bookingsRepository.save(booking);
+		
+		return true;
 	}
-
 }

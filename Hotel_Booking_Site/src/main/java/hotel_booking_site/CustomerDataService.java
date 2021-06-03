@@ -9,9 +9,10 @@ public class CustomerDataService {
 	@Autowired 
 	CustomersRepository customersRepository;
 	
-	public void persistNewCustomer(Customer customer) {
+	public boolean persistNewCustomer(Customer customer) {
 		customersRepository.save(customer);
 		
+		return true;
 	}
 }
 

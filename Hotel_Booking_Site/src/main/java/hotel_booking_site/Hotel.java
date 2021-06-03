@@ -174,4 +174,106 @@ public class Hotel {
 		this.landmarks = landmarks;
 	}
 
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((amenities == null) ? 0 : amenities.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(average_rating);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((image == null) ? 0 : image.hashCode());
+		result = prime * result + ((landmarks == null) ? 0 : landmarks.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + number_of_stars;
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((state == null) ? 0 : state.hashCode());
+		result = prime * result + ((street_address == null) ? 0 : street_address.hashCode());
+		result = prime * result + ((zip_code == null) ? 0 : zip_code.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Hotel other = (Hotel) obj;
+		if (amenities == null)
+		{
+			if (other.amenities != null)
+				return false;
+		} else if (!amenities.equals(other.amenities))
+			return false;
+		if (Double.doubleToLongBits(average_rating) != Double.doubleToLongBits(other.average_rating))
+			return false;
+		if (city == null)
+		{
+			if (other.city != null)
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
+		if (country == null)
+		{
+			if (other.country != null)
+				return false;
+		} else if (!country.equals(other.country))
+			return false;
+		if (id != other.id)
+			return false;
+		if (image == null)
+		{
+			if (other.image != null)
+				return false;
+		} else if (!image.equals(other.image))
+			return false;
+		if (landmarks == null)
+		{
+			if (other.landmarks != null)
+				return false;
+		} else if (!landmarks.equals(other.landmarks))
+			return false;
+		if (name == null)
+		{
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (number_of_stars != other.number_of_stars)
+			return false;
+		if (phone == null)
+		{
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
+		if (state == null)
+		{
+			if (other.state != null)
+				return false;
+		} else if (!state.equals(other.state))
+			return false;
+		if (street_address == null)
+		{
+			if (other.street_address != null)
+				return false;
+		} else if (!street_address.equals(other.street_address))
+			return false;
+		if (zip_code == null)
+		{
+			if (other.zip_code != null)
+				return false;
+		} else if (!zip_code.equals(other.zip_code))
+			return false;
+		return true;
+	}
+
 }

@@ -91,4 +91,53 @@ public class Booking {
 		this.number_occupants = number_occupants;
 	}
 
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((check_in_date == null) ? 0 : check_in_date.hashCode());
+		result = prime * result + ((check_out_date == null) ? 0 : check_out_date.hashCode());
+		result = prime * result + id;
+		result = prime * result + number_occupants;
+		result = prime * result + room_id;
+		long temp;
+		temp = Double.doubleToLongBits(total_price);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Booking other = (Booking) obj;
+		if (check_in_date == null)
+		{
+			if (other.check_in_date != null)
+				return false;
+		} else if (!check_in_date.equals(other.check_in_date))
+			return false;
+		if (check_out_date == null)
+		{
+			if (other.check_out_date != null)
+				return false;
+		} else if (!check_out_date.equals(other.check_out_date))
+			return false;
+		if (id != other.id)
+			return false;
+		if (number_occupants != other.number_occupants)
+			return false;
+		if (room_id != other.room_id)
+			return false;
+		if (Double.doubleToLongBits(total_price) != Double.doubleToLongBits(other.total_price))
+			return false;
+		return true;
+	}
+
 }

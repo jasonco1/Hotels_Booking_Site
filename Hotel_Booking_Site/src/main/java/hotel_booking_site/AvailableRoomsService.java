@@ -34,8 +34,6 @@ public class AvailableRoomsService {
 				Hotel hotel = hotelsRepository.findById(room.getHotel_id());
 				RoomInfo roomInfo = new RoomInfo(room, hotel);
 				roomInfoList.add(roomInfo);
-				
-				System.out.println(roomInfo.hotel.getName());
 				}
 		}
 		

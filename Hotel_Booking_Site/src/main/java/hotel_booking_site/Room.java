@@ -98,4 +98,49 @@ public class Room {
 		this.number_of_beds = number_of_beds;
 	}
 
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((bed_type == null) ? 0 : bed_type.hashCode());
+		result = prime * result + hotel_id;
+		result = prime * result + id;
+		result = prime * result + max_occupants;
+		result = prime * result + number_of_beds;
+		long temp;
+		temp = Double.doubleToLongBits(price_per_night);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Room other = (Room) obj;
+		if (bed_type == null)
+		{
+			if (other.bed_type != null)
+				return false;
+		} else if (!bed_type.equals(other.bed_type))
+			return false;
+		if (hotel_id != other.hotel_id)
+			return false;
+		if (id != other.id)
+			return false;
+		if (max_occupants != other.max_occupants)
+			return false;
+		if (number_of_beds != other.number_of_beds)
+			return false;
+		if (Double.doubleToLongBits(price_per_night) != Double.doubleToLongBits(other.price_per_night))
+			return false;
+		return true;
+	}
+
 }
