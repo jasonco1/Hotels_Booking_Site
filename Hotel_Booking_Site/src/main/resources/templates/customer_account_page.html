@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+
+<head th:replace="fragments :: html_head">
+<title>Customer Account</title>
+</head>
+<header th:replace="fragments :: nav_bar"></header>
+<body>
+
+ <h2 th:inline="text"> <i> Welcome <span th:text=${customer.getFirst_name()}> </i> </span> </h2>
+ <h3 th:inline="text"> Account Details </h3>
+ <hr />
+ 
+ <h5 th:inline="text"> Name <span th:text=${customer.getFirst_name()}></span> </h5>
+ <h5 th:inline="text"> Email <span th:text=${customer.getEmail()}></span> </h5>
+ <h5 th:inline="text"> Account Balance <span th:text=${customer.getCurrent_balance()}></span> </h5>
+ <br /> 
+  
+ <h3 th:inline="text"> My Bookings </h3>
+ <hr />
+ <h5 th:inline="text"> Hotel Name <span th:text=${bookingInfoList.get(0).hotel.getName()}></span> </h5>
+  <h5 th:inline="text"> Total Price <span th:text=${bookingInfoList.get(0).booking.getTotal_price()}></span> </h5>
+ <!-- Jason try styling this with a ThymeLeaf each statement that displays each BookingInfo object in a div, where the cancel button returns the booking id to cancel -->
+
+
+</body>
+<div th:replace="fragments :: footer" class="text-center"></div>
+</html>

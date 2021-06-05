@@ -14,6 +14,7 @@
      Staying in <span th:text=${city}> </span> 
      from <span th:text=${checkInDate}> </span>
      to <span th:text=${checkOutDate}> </span>
+     room ID: <span th:text=${roomId}> </span>
     </div>
     <hr />
    
@@ -22,7 +23,7 @@
     <h3> Create a New Account to Complete Checkout </h3> 
     
       <form action="/hotels/submitNewCustomerBooking" method="POST">
-      <input type="hidden" name="roomId" value=1>
+      <input type="hidden" name="roomId" th:value=${roomId}>
       <input type="hidden" name="numberOccupants" value=4>
       
          <label for="email"> Email  </label><br>

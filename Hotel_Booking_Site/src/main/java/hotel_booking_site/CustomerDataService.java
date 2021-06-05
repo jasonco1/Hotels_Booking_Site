@@ -14,5 +14,22 @@ public class CustomerDataService {
 		
 		return true;
 	}
+	
+	public Customer authenticateCustomer(String username, String password) {
+		
+		Customer customer = customersRepository.authenticateCustomer(username, password);	
+		if (customer == null) {
+			return null;
+		}
+		else {
+		return customer;
+		}
+	}
+	
+	public int findCustomerIdByUsername(String username) {
+
+		Customer customer = customersRepository.findCustomerIdByUsername(username);		
+		return customer.getId();
+	}
 }
 

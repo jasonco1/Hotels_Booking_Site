@@ -17,6 +17,7 @@ public class HotelBookingController {
 	String persistedCheckInDate;
 	String persistedCheckOutDate;
 	int persistedRoomId;
+	int persistedNumberOccupants;
 	
 	@Autowired 
 	AvailableRoomsService availableRoomsService;
@@ -39,34 +40,33 @@ public class HotelBookingController {
 			@RequestParam("city") String city,
 			@RequestParam("checkInDate") String checkInDate,
 			@RequestParam("checkOutDate") String checkOutDate,
-			@RequestParam("rooms") String rooms
+			@RequestParam("occupants") int numberOccupants
 			) {
 		
 		//persist city and checkIn/Out dates
 		persistedCity = city;
 		persistedCheckInDate = checkInDate;
 		persistedCheckOutDate = checkOutDate;
+		persistedNumberOccupants = numberOccupants;
 		
 		model.addAttribute("city", persistedCity);
 		model.addAttribute("checkInDate", persistedCheckInDate);
 		model.addAttribute("checkOutDate", persistedCheckOutDate);
+		model.addAttribute("numberOccupants", persistedNumberOccupants);
 		
 		//Query database to find available rooms
 		List<RoomInfo> roomInfoList = availableRoomsService.getRoomInfo(city);
 		
 		if (roomInfoList == null) {
 			String no_rooms_found = "Sorry, no available rooms where found. Please try "
-					+ "a different date or city.";
+					+ "a different city or date.";
 			model.addAttribute("no_rooms_found", no_rooms_found);
-			
 			return "no_results_page";
-			
 		}
 		
 		else {
 		model.addAttribute(roomInfoList);
 		return "hotel_results_page";
-		
 		}
 	}
 	
@@ -101,28 +101,48 @@ public class HotelBookingController {
 		model.addAttribute("checkOutDate", persistedCheckOutDate);
 		model.addAttribute("totalPrice", 199.00);
 		
-		//persist new booking to database
-		Booking booking = new Booking();
-		booking.setRoom_id(1);
-		booking.setCheck_in_date(persistedCheckInDate);
-		booking.setCheck_out_date(persistedCheckOutDate);
-		booking.setTotal_price(199.00);
-		booking.setNumber_occupants(1);	
-		
-		newBookingService.persistNewBooking(booking);
-		
 		//persist new customer to database
 		Customer customer = new Customer();
 		customer.setFirst_name(first_name);
 		customer.setLast_name(last_name);
 		customer.setEmail(email);
-		customer.setCurrent_balance(10);
-		
+		customer.setPassword(password);
+		customer.setCurrent_balance(150);
 		customerDataService.persistNewCustomer(customer);
+		
+		//persist new booking to database
+		Booking booking = new Booking();
+		booking.setRoom_id(persistedRoomId);
+		booking.setCustomer_id(customerDataService.findCustomerIdByUsername(email));
+		booking.setCheck_in_date(persistedCheckInDate);
+		booking.setCheck_out_date(persistedCheckOutDate);
+		booking.setTotal_price(199.00);
+		booking.setNumber_occupants(1);	
+		newBookingService.persistNewBooking(booking);
 		
 		return "booking_confirmation_page";
 	}
 	
+	@PostMapping("/hotels/myAccount")
+	public String getCustomerAccountDetails(Model model,
+			@RequestParam("username") String username,
+			@RequestParam("password") String password
+			) {
+		
+		//Get customer data and list of customer's bookings
+		Customer customer =	customerDataService.authenticateCustomer(username, password);
+		List<BookingInfo> bookingInfoList = newBookingService.getListOfBookingsByCustomerId(customer.getId());
+		
+		
+		/***Jason: need to return errors to the login_page if customer = null due to invalid credentials
+		//Try If (customer == null), add some error messages to model, return login page + error messages on the form. Else, return customer_account_page
+		***/
+		
+		model.addAttribute(customer);
+		model.addAttribute(bookingInfoList);
+		
+		return "customer_account_page";
+	}
 	
 	//Navigation Bar Routes
 	@GetMapping("/hotels/login")

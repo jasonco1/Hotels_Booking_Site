@@ -2,8 +2,6 @@ package hotel_booking_site;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
@@ -12,7 +10,7 @@ import javax.persistence.Table;
 //custom queries: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference
 //https://www.javaguides.net/2018/11/spring-data-jpa-namednativequery-namednativequeries-example.html
 @NamedNativeQuery(name = "Room.findByCityName",
-	query = "SELECT r.id, r.hotel_id, r.price_per_night, r.max_occupants, r.bed_type, r.number_of_beds FROM rooms r JOIN hotels_table h ON r.hotel_id = h.id WHERE h.city = ?1 AND r.id NOT IN (SELECT room_id FROM bookings) ORDER BY h.name",
+	query = "SELECT r.id, r.hotel_id, r.price_per_night, r.max_occupants, r.bed_type, r.number_of_beds FROM rooms r JOIN hotels_table h ON r.hotel_id = h.id WHERE h.city = ?1 AND r.id NOT IN (SELECT room_id FROM bookings) ORDER BY r.price_per_night",
 			resultClass = Room.class)
 			
 public class Room {

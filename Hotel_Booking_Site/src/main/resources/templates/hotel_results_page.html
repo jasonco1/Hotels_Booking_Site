@@ -12,35 +12,11 @@
    <div class="container">
       <h2 th:inline="text"> Available hotels in <span th:text=${city}></span> 
       from <span th:text=${checkInDate}></span> to <span th:text=${checkOutDate}></span> 
+      for <span th:text=${numberOccupants}> </span> <span th:text="${numberOccupants == 1} ? 'Guest' : 'Guests' "> </span>
       </h2>
     <hr /> 
-   
-<!--    <table>
-      <tr>
-         <th> Hotel Name   </th>
-         <th> Price Per Night </th>
-         <th> Max Occupants   </th>
-         <th> Bed Type  </th>
-         <th> Number of Beds  </th>
-         <th> City </th>
-         <th> Phone </th>
-       </tr>
-
-   <tr th:each="roomInfo : ${roomInfoList}"> 
-      <td th:text="${roomInfo.hotel.getName()}"></td>
-      <td th:text="${roomInfo.room.price_per_night}"></td>
-      <td th:text="${roomInfo.room.max_occupants}"></td>
-      <td th:text="${roomInfo.room.bed_type}"></td>
-      <td th:text="${roomInfo.room.number_of_beds}"></td>
-      <td th:text="${roomInfo.hotel.getCity()}"></td>
-      <td th:text="${roomInfo.hotel.getPhone()}"></td>
-   </tr>
-
-   </table>   
-   <a th:href="@{/hotels/checkout}"> Book Now </a>
-   </div> -->
-   
-        <div class="main">
+    
+   <div class="main">
    <div class="listings" th:each="roomInfo : ${roomInfoList}"> 
     <div class="listing_image"> 
     <!--Temp img import-->
@@ -76,14 +52,9 @@
    					$<tr><td th:text="${roomInfo.room.price_per_night}"></td> per night <br>
    					<tr><br>		
    					<form th:action="@{/hotels/checkout}" method="post">
-   					<!-- <input type="hidden" id="testString" name="testString" value="Monterey" /> -->
-   					<!-- <input type="hidden" id="roomId" name="roomId" value="${roomInfo.room.getId()}" /> -->
    					<input type="hidden" id="roomId" name="roomId" th:value=${roomInfo.room.getId()} />
-   					<!-- <input type="hidden" id="roomId" name="roomId" value=1 /> -->
    					<button class="button button2" type="submit">Book Now</button>
    					</form>
-   					<!-- <a th:href="@{/hotels/checkout}"> Book Now </a> -->
-   				
    			</div>
     </div>    
 

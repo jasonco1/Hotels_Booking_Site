@@ -13,6 +13,7 @@ public class Booking {
 	@Id
 	private int id;
 	private int room_id;
+	private int customer_id;
 	private double total_price;
 	private String check_in_date;
 	private String check_out_date;
@@ -20,11 +21,13 @@ public class Booking {
 	
 	public Booking () { }
 
-	public Booking(int room_id, double total_price, String check_in_date, String check_out_date,
+	public Booking(int id, int room_id, int customer_id, double total_price, String check_in_date, String check_out_date,
 	      int number_occupants)
 	{
 		super();
+		this.id = id;
 		this.room_id = room_id;
+		this.customer_id = customer_id;
 		this.total_price = total_price;
 		this.check_in_date = check_in_date;
 		this.check_out_date = check_out_date;
@@ -49,6 +52,16 @@ public class Booking {
 	public void setRoom_id(int room_id)
 	{
 		this.room_id = room_id;
+	}
+
+	public int getCustomer_id()
+	{
+		return customer_id;
+	}
+
+	public void setCustomer_id(int customer_id)
+	{
+		this.customer_id = customer_id;
 	}
 
 	public double getTotal_price()
@@ -98,6 +111,7 @@ public class Booking {
 		int result = 1;
 		result = prime * result + ((check_in_date == null) ? 0 : check_in_date.hashCode());
 		result = prime * result + ((check_out_date == null) ? 0 : check_out_date.hashCode());
+		result = prime * result + customer_id;
 		result = prime * result + id;
 		result = prime * result + number_occupants;
 		result = prime * result + room_id;
@@ -128,6 +142,8 @@ public class Booking {
 			if (other.check_out_date != null)
 				return false;
 		} else if (!check_out_date.equals(other.check_out_date))
+			return false;
+		if (customer_id != other.customer_id)
 			return false;
 		if (id != other.id)
 			return false;
