@@ -16,7 +16,7 @@ public class HotelBookingController {
 	String persistedCity;
 	String persistedCheckInDate;
 	String persistedCheckOutDate;
-	String persistedRoomId;
+	int persistedRoomId;
 	
 	@Autowired 
 	AvailableRoomsService availableRoomsService;
@@ -47,9 +47,9 @@ public class HotelBookingController {
 		persistedCheckInDate = checkInDate;
 		persistedCheckOutDate = checkOutDate;
 		
-		model.addAttribute(city);
-		model.addAttribute(checkInDate);
-		model.addAttribute(checkOutDate);
+		model.addAttribute("city", persistedCity);
+		model.addAttribute("checkInDate", persistedCheckInDate);
+		model.addAttribute("checkOutDate", persistedCheckOutDate);
 		
 		//Query database to find available rooms
 		List<RoomInfo> roomInfoList = availableRoomsService.getRoomInfo(city);
@@ -70,9 +70,13 @@ public class HotelBookingController {
 		}
 	}
 	
-	@GetMapping("/hotels/checkout")
-	public String getCheckoutDetails(Model model) {
+	@PostMapping("/hotels/checkout")
+	public String getCheckoutDetails(Model model,
+			@RequestParam("roomId") int roomId
+			) {
+		persistedRoomId = roomId;
 		
+		model.addAttribute("roomId", persistedRoomId);
 		model.addAttribute("city", persistedCity);
 		model.addAttribute("checkInDate", persistedCheckInDate);
 		model.addAttribute("checkOutDate", persistedCheckOutDate);
