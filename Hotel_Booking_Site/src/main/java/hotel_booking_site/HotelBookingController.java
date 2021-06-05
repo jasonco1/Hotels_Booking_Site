@@ -60,8 +60,9 @@ public class HotelBookingController {
 		if (roomInfoList == null) {
 			String no_rooms_found = "Sorry, no available rooms where found. Please try "
 					+ "a different city or date.";
+			model.addAttribute("no_results", true);
 			model.addAttribute("no_rooms_found", no_rooms_found);
-			return "no_results_page";
+			return "hotels_homepage";
 		}
 		
 		else {
