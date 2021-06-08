@@ -37,8 +37,12 @@ public class NewBookingService {
 			bookingInfoList.add(bookingInfo);
 		
 		}
-		
 		return bookingInfoList;
+	}
+	
+	public boolean cancelHotelBooking(int id) {
+		bookingsRepository.deleteByBookingId(id);
+		return true;
 	}
 	
 }

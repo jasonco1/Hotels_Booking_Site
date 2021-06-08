@@ -16,12 +16,28 @@
  <h5 th:inline="text"> Account Balance <span th:text=${customer.getCurrent_balance()}></span> </h5>
  <br /> 
   
- <h3 th:inline="text"> My Bookings </h3>
+ <h3 th:inline="text"> My Bookings </h3>    
  <hr />
- <h5 th:inline="text"> Hotel Name <span th:text=${bookingInfoList.get(0).hotel.getName()}></span> </h5>
-  <h5 th:inline="text"> Total Price <span th:text=${bookingInfoList.get(0).booking.getTotal_price()}></span> </h5>
+ 
+ <div th:if="${bookings}">
+ 
  <!-- Jason try styling this with a ThymeLeaf each statement that displays each BookingInfo object in a div, where the cancel button returns the booking id to cancel -->
+ <h5 th:inline="text"> Hotel Name <span th:text=${bookingInfoList.get(0).hotel.getName()}></span> </h5>
+ <h5 th:inline="text"> Total Price <span th:text=${bookingInfoList.get(0).booking.getTotal_price()}></span> </h5>
+ <h5 th:inline="text"> Booking Id <span th:text=${bookingInfoList.get(0).booking.getId()}></span> </h5>
 
+
+   <form action="/hotels/cancelHotelBooking" method="POST">
+   <input type="hidden" name="booking_id" th:value=${bookingInfoList.get(0).booking.getId()}>
+   <input type="hidden" name="customer_id" th:value=${customer.getId()}>
+   
+   <button type="submit"> Cancel Booking with ID <span th:text="${bookingInfoList.get(0).booking.getId()}"> </span></button>
+   </form>
+</div>
+
+ <div th:if="!${bookings}"> 
+ <h4> You have no active bookings. </h4>
+ </div>
 
 </body>
 <div th:replace="fragments :: footer" class="text-center"></div>

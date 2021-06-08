@@ -15,6 +15,7 @@
          <input type="password" id="password" name="password" placeholder="password"><br><br>        
          <button class="button button3" type="submit">Login</button>
       </form>
+      <h5 style="text-align: center; color: rgb(255, 0, 0)" th:text="${invalid_login} ? 'Invalid login attempt. Please re-enter your credentials.' : '' "> </h5>
       <br>
       <p>Don't have an account?<a href="/hotels/signup"> Sign up Here</a></p>
       <br><br>

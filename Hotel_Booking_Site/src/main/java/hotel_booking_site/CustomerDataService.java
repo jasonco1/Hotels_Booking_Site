@@ -11,7 +11,6 @@ public class CustomerDataService {
 	
 	public boolean persistNewCustomer(Customer customer) {
 		customersRepository.save(customer);
-		
 		return true;
 	}
 	
@@ -27,9 +26,13 @@ public class CustomerDataService {
 	}
 	
 	public int findCustomerIdByUsername(String username) {
-
 		Customer customer = customersRepository.findCustomerIdByUsername(username);		
 		return customer.getId();
+	}
+	
+	public Customer findCustomerById(int id) {
+		Customer customer = customersRepository.findbyCustomerId(id);
+		return customer;
 	}
 }
 

@@ -130,25 +130,60 @@ public class HotelBookingController {
 			@RequestParam("password") String password
 			) {
 		
-		//Get customer data and list of customer's bookings
 		Customer customer =	customerDataService.authenticateCustomer(username, password);
-		List<BookingInfo> bookingInfoList = newBookingService.getListOfBookingsByCustomerId(customer.getId());
-		
-		
-		/***Jason: need to return errors to the login_page if customer = null due to invalid credentials
-		//Try If (customer == null), add some error messages to model, return login page + error messages on the form. Else, return customer_account_page
-		***/
-		
+		if (customer == null) {
+			model.addAttribute("invalid_login", true);
+			return "customer_login_page";
+		}
+		else {
 		model.addAttribute(customer);
+		
+		//Build list of customer's bookings if login is valid
+		List<BookingInfo> bookingInfoList = newBookingService.getListOfBookingsByCustomerId(customer.getId());
+		if (bookingInfoList.isEmpty()) {
+			model.addAttribute("bookings", false);
+		}
+		
+		else {
+		model.addAttribute("bookings", true);
 		model.addAttribute(bookingInfoList);
+		}
+		
+		return "customer_account_page";
+		}
+	}
+	
+	@PostMapping("/hotels/cancelHotelBooking")
+	public String cancelHotelBooking(Model model, 
+			@RequestParam("booking_id") int booking_id,
+			@RequestParam("customer_id") int customer_id
+			){
+		
+		//cancel hotel booking
+		newBookingService.cancelHotelBooking(booking_id);
+		
+		//retrieved updated list of customer bookings
+		Customer customer = customerDataService.findCustomerById(customer_id);
+		model.addAttribute(customer);
+		
+		List<BookingInfo> bookingInfoList = newBookingService.getListOfBookingsByCustomerId(customer.getId());
+		if (bookingInfoList.isEmpty()) {
+			model.addAttribute("bookings", false);
+		}
+		
+		else {
+		model.addAttribute("bookings", true);
+		model.addAttribute(bookingInfoList);
+		}
 		
 		return "customer_account_page";
 	}
 	
+	
 	//Navigation Bar Routes
 	@GetMapping("/hotels/login")
 	public String getHotelsLoginPage(Model model) {
-		return "hotels_login_page";
+		return "customer_login_page";
 	}
 	
 	@GetMapping("/hotels/signup")

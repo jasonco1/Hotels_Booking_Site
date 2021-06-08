@@ -7,9 +7,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="customers")
-@NamedNativeQuery(name = "Customer.authenticateCustomer",
-	query = "SELECT c.id, c.first_name, c.last_name, c.email, c.password, c.current_balance FROM customers c WHERE c.email = ?1 AND c.password = ?2",
-	resultClass = Customer.class)
 public class Customer {
 	
 	@Id
