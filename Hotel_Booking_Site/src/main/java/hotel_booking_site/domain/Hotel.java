@@ -1,4 +1,4 @@
-package hotel_booking_site;
+package hotel_booking_site.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

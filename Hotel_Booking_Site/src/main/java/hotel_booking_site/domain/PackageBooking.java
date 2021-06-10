@@ -1,4 +1,4 @@
-package hotel_booking_site;
+package hotel_booking_site.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,8 +7,8 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="bookings")
-public class Booking {
+@Table(name="package_bookings")
+public class PackageBooking {
 	
 	@Id
 	private int id;
@@ -19,10 +19,10 @@ public class Booking {
 	private String check_out_date;
 	private int number_occupants;
 	
-	public Booking () { }
+	public PackageBooking() { }
 
-	public Booking(int id, int room_id, int customer_id, double total_price, String check_in_date, String check_out_date,
-	      int number_occupants)
+	public PackageBooking(int id, int room_id, int customer_id, double total_price, String check_in_date,
+	      String check_out_date, int number_occupants)
 	{
 		super();
 		this.id = id;
@@ -130,7 +130,7 @@ public class Booking {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Booking other = (Booking) obj;
+		PackageBooking other = (PackageBooking) obj;
 		if (check_in_date == null)
 		{
 			if (other.check_in_date != null)

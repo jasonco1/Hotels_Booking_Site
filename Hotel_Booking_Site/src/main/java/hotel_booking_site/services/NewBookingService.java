@@ -1,10 +1,20 @@
-package hotel_booking_site;
+package hotel_booking_site.services;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import hotel_booking_site.domain.Booking;
+import hotel_booking_site.domain.BookingInfo;
+import hotel_booking_site.domain.Hotel;
+import hotel_booking_site.domain.PackageBooking;
+import hotel_booking_site.domain.Room;
+import hotel_booking_site.repository.BookingsRepository;
+import hotel_booking_site.repository.HotelsRepository;
+import hotel_booking_site.repository.PackageBookingsRepository;
+import hotel_booking_site.repository.RoomsRepository;
 
 @Service
 public class NewBookingService {
@@ -18,9 +28,16 @@ public class NewBookingService {
 	@Autowired
 	RoomsRepository roomsRepository;
 	
+	@Autowired 
+	PackageBookingsRepository packageBookingsRepository;
+	
 	public boolean persistNewBooking(Booking booking) {
 		bookingsRepository.save(booking);
-		
+		return true;
+	}
+	
+	public boolean persistNewPackageBooking(PackageBooking packageBooking) {
+		packageBookingsRepository.save(packageBooking);
 		return true;
 	}
 	
@@ -45,4 +62,8 @@ public class NewBookingService {
 		return true;
 	}
 	
+	public boolean cancelPackageHotelBooking(int id) {
+		packageBookingsRepository.deletePackageBookingById(id);
+		return true;
+	}
 }

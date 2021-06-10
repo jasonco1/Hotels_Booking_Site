@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import hotel_booking_site.domain.Booking;
+import hotel_booking_site.repository.BookingsRepository;
+import hotel_booking_site.services.NewBookingService;
+
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -36,7 +40,7 @@ public class NewBookingServiceTest {
 	@Test
 	public void newBookingServiceShouldPersistNewBooking() {
 	
-	Booking booking = new Booking(1, 199.0, "6/1/2021", "6/03/2021", 2);
+	Booking booking = new Booking(1, 1, 1, 199.0, "6/1/2021", "6/03/2021", 2);
 	given(bookingsRepository.save(booking)).willReturn(booking);
 	
 	assertThat(true).isEqualTo(newBookingService.persistNewBooking(booking));

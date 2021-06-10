@@ -1,4 +1,4 @@
-package hotel_booking_site;
+package hotel_booking_site.services;
 
 
 import java.util.List;
@@ -6,6 +6,12 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import hotel_booking_site.domain.Hotel;
+import hotel_booking_site.domain.Room;
+import hotel_booking_site.domain.RoomInfo;
+import hotel_booking_site.repository.HotelsRepository;
+import hotel_booking_site.repository.RoomsRepository;
 
 @Service
 public class AvailableRoomsService {

@@ -1,4 +1,4 @@
-package hotel_booking_site;
+package hotel_booking_site.repository;
 
 import java.util.List;
 
@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import hotel_booking_site.domain.Booking;
 
 public interface BookingsRepository extends JpaRepository<Booking, Long> {
 	

@@ -1,7 +1,10 @@
-package hotel_booking_site;
+package hotel_booking_site.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import hotel_booking_site.domain.Customer;
+import hotel_booking_site.repository.CustomersRepository;
 
 @Service
 public class CustomerDataService {

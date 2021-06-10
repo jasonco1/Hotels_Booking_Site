@@ -1,7 +1,10 @@
-package hotel_booking_site;
+package hotel_booking_site.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import hotel_booking_site.domain.Customer;
+
 import org.springframework.data.jpa.repository.Query;
 
 public interface CustomersRepository extends JpaRepository<Customer, Long> {

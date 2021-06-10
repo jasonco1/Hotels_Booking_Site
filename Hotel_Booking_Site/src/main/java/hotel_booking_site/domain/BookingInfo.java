@@ -1,4 +1,4 @@
-package hotel_booking_site;
+package hotel_booking_site.domain;
 
 public class BookingInfo {
 	

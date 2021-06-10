@@ -11,6 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import hotel_booking_site.domain.Hotel;
+import hotel_booking_site.domain.Room;
+import hotel_booking_site.domain.RoomInfo;
+import hotel_booking_site.repository.HotelsRepository;
+import hotel_booking_site.repository.RoomsRepository;
+import hotel_booking_site.services.AvailableRoomsService;
+
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;

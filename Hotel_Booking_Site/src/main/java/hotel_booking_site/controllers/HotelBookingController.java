@@ -1,4 +1,4 @@
-package hotel_booking_site;
+package hotel_booking_site.controllers;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -10,9 +10,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import hotel_booking_site.domain.Booking;
+import hotel_booking_site.domain.BookingInfo;
+import hotel_booking_site.domain.Customer;
+import hotel_booking_site.domain.RoomInfo;
+import hotel_booking_site.services.AvailableRoomsService;
+import hotel_booking_site.services.CustomerDataService;
+import hotel_booking_site.services.NewBookingService;
+
 @Controller
 public class HotelBookingController {
 	
+	//Convert this to use HTTP Sessions
 	String persistedCity;
 	String persistedCheckInDate;
 	String persistedCheckOutDate;
@@ -27,7 +36,6 @@ public class HotelBookingController {
 	
 	@Autowired
 	CustomerDataService customerDataService;
-	
 	
 	//HTTP Routes
 	@GetMapping("/hotels/home")
@@ -178,7 +186,6 @@ public class HotelBookingController {
 		
 		return "customer_account_page";
 	}
-	
 	
 	//Navigation Bar Routes
 	@GetMapping("/hotels/login")
