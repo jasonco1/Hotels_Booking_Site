@@ -44,7 +44,8 @@
    <input type="hidden" name="booking_id" th:value=${bookingInfo.booking.getId()}>
    <input type="hidden" name="customer_id" th:value=${customer.getId()}>
    
-   <button type="submit" class="btn btn-danger">Cancel Booking with ID <span th:text="${bookingInfo.booking.getId()}"></span></button>
+   <!--  Jason can you add a Bootstrap modal asking if the customer is sure they want to cancel the booking? If yes then use this existing button as the "cancel" option button. -->
+   <button type="submit" class="btn btn-danger">Cancel Booking </button>
    </form>
    
    </div>
