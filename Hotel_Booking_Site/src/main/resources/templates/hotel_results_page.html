@@ -19,8 +19,11 @@
    <div class="main">
    <div class="listings" th:each="roomInfo : ${roomInfoList}"> 
     <div class="listing_image"> 
-    <!--Temp img import-->
-    <img class="img_temp" src="/img/room_single_queen.jpg" alt="singleQ">
+    <!--Conditional img import-->
+    <img th:if= "${roomInfo.room.bed_type == 'King' && roomInfo.room.number_of_beds == 1}" class="img_temp" src="/img/fancyroom_single_king.jpg" alt="singleK">
+    <img th:if= "${roomInfo.room.bed_type == 'Queen' && roomInfo.room.number_of_beds == 1}" class="img_temp" src="/img/room_single_queen.jpg" alt="singleQ">
+    <img th:if= "${roomInfo.room.bed_type == 'Queen' && roomInfo.room.number_of_beds == 2}" class="img_temp" src="/img/room_double_queen.jpg" alt="doubleQ">
+    <img th:if= "${roomInfo.room.bed_type == 'Single' && roomInfo.room.number_of_beds == 2}" class="img_temp" src="/img/room_double_single.jpg" alt="doubleS">
     </div>
     <div class="listing_content">
         <h3 class="listing_title">
@@ -28,16 +31,22 @@
    					<!-- Note: add room_desc or room_name -->
    					<td>Single Suite,</td> 
    					<td th:text="${roomInfo.room.number_of_beds}"></td>
-   					<td th:text="${roomInfo.room.bed_type}"></td><br>
+   					<td th:text="${roomInfo.room.bed_type}"></td>
+   					<td th:text="${roomInfo.room.number_of_beds == 1} ? 'Bed' : 'Beds' "> </td>
+   					<br>
    				</tr>
    				<div class="listing_text">
-   				Occupies up to <tr><td th:text="${roomInfo.room.max_occupants}"></td> people<tr><br>
+   				Occupies up to <tr>
+   					<td th:text="${roomInfo.room.max_occupants}"></td> 
+   					<td th:text= "${roomInfo.room.max_occupants == 1} ? 'person' : 'people' ">
+   					</td></tr><br>
    					<tr>
    					<td th:text="${roomInfo.room.number_of_beds}"></td>
    					<td th:text="${roomInfo.room.bed_type}"></td>
+   					<td th:text="${roomInfo.room.number_of_beds == 1} ? 'Bed' : 'Beds' "> </td>
    					<br><br>
-   				</tr>
-   					Located at <tr><td th:text="${roomInfo.hotel.getName()}"></td><tr><br>
+   					</tr>
+   					<h4 class=listing_hotel_name th:text="${roomInfo.hotel.getName()}"></h4>
    				<tr>
    					<td th:text="${roomInfo.hotel.getStreet_address()}"></td>, 
    					<td th:text="${roomInfo.hotel.getState()}"></td>,

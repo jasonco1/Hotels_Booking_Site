@@ -109,6 +109,7 @@ public class HotelBookingController {
 		model.addAttribute("checkInDate", persistedCheckInDate);
 		model.addAttribute("checkOutDate", persistedCheckOutDate);
 		model.addAttribute("totalPrice", 199.00);
+		model.addAttribute("numberOccupants", persistedNumberOccupants);
 		
 		//persist new customer to database
 		Customer customer = new Customer();
@@ -128,6 +129,8 @@ public class HotelBookingController {
 		booking.setTotal_price(199.00);
 		booking.setNumber_occupants(1);	
 		newBookingService.persistNewBooking(booking);
+		
+		model.addAttribute(customer);
 		
 		return "booking_confirmation_page";
 	}
