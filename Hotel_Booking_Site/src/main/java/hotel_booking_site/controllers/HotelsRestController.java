@@ -29,8 +29,6 @@ import hotel_booking_site.services.NewBookingService;
  * 4. Persists new Customer object to database via ("/hotels/api/createNewCustomer/") 
  * See individual routes for usage instructions
  */
-
-//API Key
 @RestController
 public class HotelsRestController {
 

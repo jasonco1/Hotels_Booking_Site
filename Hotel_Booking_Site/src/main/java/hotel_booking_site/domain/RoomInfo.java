@@ -5,6 +5,8 @@ public class RoomInfo {
 	public Room room;
 	public Hotel hotel;
 	
+	public RoomInfo() { }
+	
 	public RoomInfo(Room room, Hotel hotel)
 	{
 		this.room = room;
