@@ -4,7 +4,6 @@ package hotel_booking_site;
  * https://stackoverflow.com/questions/24199393/how-to-send-a-mock-object-as-json-in-mockmvc
  * https://www.tutorialspoint.com/how-to-convert-java-object-to-json-using-jackson-library
  */
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -12,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.apache.tomcat.jni.Status;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -24,11 +22,9 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +33,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import hotel_booking_site.services.*;
 import hotel_booking_site.domain.*;
-import hotel_booking_site.repository.*;
 import hotel_booking_site.controllers.*;
 
 @WebMvcTest(HotelsRestController.class)
@@ -87,16 +82,17 @@ public class HotelsRestControllerTest {
 		given(availableRoomsService.getRoomInfo("Monterey")).willReturn(roomInfoList);
 		given(availableRoomsService.getRoomInfo("InvalidCity")).willReturn(null);
 		
-		//Simulate HTTP GET request to API route
+		//Simulate HTTP GET requests to API route for valid and invalid city names
 		MockHttpServletResponse response = mockMvc.perform(get("/hotels/api/getRooms/?city=Monterey&checkInDate=6/01/2022&checkOutDate=6/07/2021")).andReturn().getResponse();
 		MockHttpServletResponse notFoundResponse = mockMvc.perform(get("/hotels/api/getRooms/?city=InvalidCity&checkInDate=6/01/2022&checkOutDate=6/07/2021")).andReturn().getResponse();
 		
-		//Convert HTTP response in JSON to RoomInfo list
+		//Convert HTTP response in JSON to RoomInfo list and get status code of search when city name is not found
 		List<RoomInfo> actualResult = jsonRoomInfoListAttempt.parseObject(response.getContentAsString());
-	
+		int invalidStatusCode = notFoundResponse.getStatus();
+		
 		//Compare actual and expected results
-		assertThat(actualResult).isEqualTo(roomInfoList);
-		//assertThat(notFoundResponse).isEqualTo(null);
+		assertEquals(actualResult, roomInfoList);
+		assertEquals(404, invalidStatusCode);
 	}
 	
 	@Test
@@ -107,14 +103,55 @@ public class HotelsRestControllerTest {
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(packageBooking);
 		
-		//MockBean for NewBookingService
+		//Test stub for NewBookingService
 		given(newBookingService.persistNewPackageBooking(packageBooking)).willReturn(true);
 		
 		//Call API with packageBooking in JSON form as POST parameter
+		//API will only accept POST requests
 		MockHttpServletResponse response = mockMvc.perform(post("/hotels/api/newPackageBooking/").contentType(MediaType.APPLICATION_JSON).content(json)).andReturn().getResponse();
+		MockHttpServletResponse invalidHttpMethodResponse = mockMvc.perform(get("/hotels/api/newPackageBooking/").contentType(MediaType.APPLICATION_JSON).content(json)).andReturn().getResponse();
 		int statusCode = response.getStatus();
+		int invalidStatusCode = invalidHttpMethodResponse.getStatus();
 		
 		assertEquals(200, statusCode);
+		assertEquals(405, invalidStatusCode);
 	}
 
+	@Test
+	public void shouldDeletePackageBookingById() throws Exception {
+		
+		int packageBookingId = 123;
+		given(newBookingService.cancelPackageHotelBooking(packageBookingId)).willReturn(true);
+		
+		//Call API with id of PackageBooking to delete from database
+		//Only delete (not post) method is accepted
+		MockHttpServletResponse response = mockMvc.perform(delete("/hotels/api/cancelPackageBooking/123")).andReturn().getResponse();
+		MockHttpServletResponse invalidHttpMethodResponse = mockMvc.perform(post("/hotels/api/cancelPackageBooking/123")).andReturn().getResponse();
+		int statusCode = response.getStatus();
+		int invalidStatusCode = invalidHttpMethodResponse.getStatus();
+		
+		assertEquals(200, statusCode);
+		assertEquals(405, invalidStatusCode);
+	}
+	
+	@Test
+	public void shouldPersistNewCustomer() throws Exception {
+		
+		//create Customer object and convert to JSON
+		Customer customer = new Customer("GivenName", "Surname", "email@email.com", "dc647eb65e6711e155375218212b3964", 150.0);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(customer);
+		
+		given(customerDataService.persistNewCustomer(customer)).willReturn(true);
+		
+		//Call API to save Customer object
+		MockHttpServletResponse response = mockMvc.perform(post("/hotels/api/createNewCustomer/").contentType(MediaType.APPLICATION_JSON).content(json)).andReturn().getResponse();
+		MockHttpServletResponse invalidHttpMethodResponse = mockMvc.perform(get("/hotels/api/createNewCustomer/").contentType(MediaType.APPLICATION_JSON).content(json)).andReturn().getResponse();
+		int statusCode = response.getStatus();
+		int invalidStatusCode = invalidHttpMethodResponse.getStatus();
+		
+		assertEquals(200, statusCode);
+		assertEquals(405, invalidStatusCode);
+	}
+	
 }
