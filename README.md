@@ -9,9 +9,9 @@ The database for Hotel_Booking_Site is designed with 5 tables as follows:
   package_bookings: Equivalent to bookings table, reserved for package bookings only.
 
 ## Database tables
-Use the .sql script file to create tables and populate the starting database if needed
+Use the .sql script file to create tables and populate the starting database if needed.
 
-create a new database named hotels. Then use these scripts to create the tables
+create a new database named hotels. Then use these scripts to create the tables.
 
 USE hotels; #create database as 'hotels'
 
