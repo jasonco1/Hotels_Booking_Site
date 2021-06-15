@@ -1,4 +1,4 @@
-##Database design
+# Database design
 
 The database for Hotel_Booking_Site is designed with 5 tabled as follows:
   hotels_table: Contains all descriptive, location and contact data necessary for a hotel.
@@ -8,7 +8,7 @@ The database for Hotel_Booking_Site is designed with 5 tabled as follows:
             associated customer_id and room_id are inserted to the table.
   package_bookings: Equivalent to bookings table, reserved for package bookings only.
 
-#Database tables
+## Database tables
 Use the .sql script file to create tables and populate the starting database if needed
 
 create a new database named hotels. Then use these scripts to create the tables
@@ -76,7 +76,7 @@ CREATE TABLE customers (
     PRIMARY KEY (id)
     )
 
-#Test data
+## Test data
 INSERT INTO `hotels_table` VALUES 
 (1,'Caesars Palace','3570 Las Vegas Boulevard South','Las Vegas','Nevada','USA','89109','(866) 227-5938',4,NULL,4,'Bathroom','Las Vegas Strip'),
 (2,'The Cosmopolitan','3708 Las Vegas Vlvd','Las Vegas','Nevada','USA','89109','(702) 698-7000',5,NULL,5,'Casino','Las Vegas Strip');
