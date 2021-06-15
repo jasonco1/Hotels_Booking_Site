@@ -1,12 +1,12 @@
 # Database design
 
 The database for Hotel_Booking_Site is designed with 5 tables as follows:
-  hotels_table: Contains all descriptive, location and contact data necessary for a hotel.
-  rooms: Aside from necessary descriptive data, each room is associated with a hotel_id.
-  customers:Upon account creation, customer information is added to the table.
-  bookings: After finalizing a booking, all relevant search criteria, calculated total price, 
+  *  hotels_table: Contains all descriptive, location and contact data necessary for a hotel.
+  * rooms: Aside from necessary descriptive data, each room is associated with a hotel_id.
+  *  customers:Upon account creation, customer information is added to the table.
+  *  bookings: After finalizing a booking, all relevant search criteria, calculated total price, 
             associated customer_id and room_id are inserted to the table.
-  package_bookings: Equivalent to bookings table, reserved for package bookings only.
+  * package_bookings: Equivalent to bookings table, reserved for package bookings only.
 
 ## Database tables
 Use the .sql script file to create tables and populate the starting database if needed.
@@ -75,6 +75,9 @@ CREATE TABLE package_bookings (
     )
 
 ## Test data
+
+Small subset of test data. Creates 2 hotels and 12 rooms (6 for each hotel).
+
 INSERT INTO `hotels_table` VALUES 
 (1,'Caesars Palace','3570 Las Vegas Boulevard South','Las Vegas','Nevada','USA','89109','(866) 227-5938',4,NULL,4,'Bathroom','Las Vegas Strip'),
 (2,'The Cosmopolitan','3708 Las Vegas Vlvd','Las Vegas','Nevada','USA','89109','(702) 698-7000',5,NULL,5,'Casino','Las Vegas Strip');
@@ -92,17 +95,3 @@ INSERT INTO `rooms` VALUES
 (10,2,100,2,'Single',2),
 (11,2,110,4,'King',1),
 (12,2,110,4,'King',1);
-
-- Item 1
-- Item 2
-  - Sub Item 1
-  - Sub Item 2
-   
-#^ two spaces
-
-* Item 1
-* Item 2
-  * Sub Item 1
-  * Sub Item 2
-
-
