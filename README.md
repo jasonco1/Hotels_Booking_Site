@@ -1,6 +1,6 @@
 # Database design
 
-The database for Hotel_Booking_Site is designed with 5 tabled as follows:
+The database for Hotel_Booking_Site is designed with 5 tables as follows:
   hotels_table: Contains all descriptive, location and contact data necessary for a hotel.
   rooms: Aside from necessary descriptive data, each room is associated with a hotel_id.
   customers:Upon account creation, customer information is added to the table.
