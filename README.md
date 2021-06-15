@@ -3,7 +3,7 @@
 The database for Hotel_Booking_Site is designed with 5 tables as follows:
   *  hotels_table: Contains all descriptive, location and contact data necessary for a hotel.
   * rooms: Aside from necessary descriptive data, each room is associated with a hotel_id.
-  *  customers:Upon account creation, customer information is added to the table.
+  *  customers: Upon account creation, customer information is added to the table.
   *  bookings: After finalizing a booking, all relevant search criteria, calculated total price, 
             associated customer_id and room_id are inserted to the table.
   * package_bookings: Equivalent to bookings table, reserved for package bookings only.
