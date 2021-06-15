@@ -93,3 +93,16 @@ INSERT INTO `rooms` VALUES
 (11,2,110,4,'King',1),
 (12,2,110,4,'King',1);
 
+- Item 1
+- Item 2
+  - Sub Item 1
+  - Sub Item 2
+   
+#^ two spaces
+
+* Item 1
+* Item 2
+  * Sub Item 1
+  * Sub Item 2
+
+
