@@ -15,16 +15,6 @@ create a new database named hotels. Then use these scripts to create the tables
 
 USE hotels; #create database as 'hotels'
 
-CREATE TABLE rooms( 
-	id INT NOT NULL AUTO_INCREMENT,
-    hotel_id INT, 
-    price_per_night DOUBLE, 
-    max_occupants INT,
-    bed_type VARCHAR(20),
-    number_of_beds INT,
-    PRIMARY KEY (id)
-    )
-    
 CREATE TABLE hotels_table(
 	id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(50),
@@ -42,6 +32,26 @@ CREATE TABLE hotels_table(
     PRIMARY KEY (id)
     )
 
+CREATE TABLE rooms( 
+	id INT NOT NULL AUTO_INCREMENT,
+    hotel_id INT, 
+    price_per_night DOUBLE, 
+    max_occupants INT,
+    bed_type VARCHAR(20),
+    number_of_beds INT,
+    PRIMARY KEY (id)
+    )
+    
+CREATE TABLE customers (
+	id INT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    email VARCHAR(100),
+    password VARCHAR(100),
+    current_balance INT,
+    PRIMARY KEY (id)
+    )
+    
 CREATE TABLE bookings (
 	id INT NOT NULL AUTO_INCREMENT,
     room_id INT,
@@ -53,7 +63,6 @@ CREATE TABLE bookings (
     PRIMARY KEY (id)
     )
 
-USE hotels; #create database as 'hotels'
 CREATE TABLE package_bookings (
 	id INT NOT NULL AUTO_INCREMENT,
     room_id INT,
@@ -62,17 +71,6 @@ CREATE TABLE package_bookings (
     check_in_date DATE,
     check_out_date DATE,
     number_occupants INT,
-    PRIMARY KEY (id)
-    )
-
-USE hotels; #create database as 'hotels'
-CREATE TABLE customers (
-	id INT NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(100),
-    last_name VARCHAR(100),
-    email VARCHAR(100),
-    password VARCHAR(100),
-    current_balance INT,
     PRIMARY KEY (id)
     )
 
